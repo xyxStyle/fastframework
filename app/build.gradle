@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.qianfan.fastframework"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        debug {
+            versionNameSuffix '-debug'
+            //是否开启混淆
+            minifyEnabled false
+            //是否zip优化
+            zipAlignEnabled false
+            //删除一些无用资源
+            shrinkResources false
+            //混淆所用的文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            //是否开启混淆
+            minifyEnabled true
+            //是否zip优化
+            zipAlignEnabled true
+            //删除一些无用资源
+            shrinkResources true
+            //混淆所用的文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+//greendao配置
+greendao {
+    schemaVersion 1                             //版本号，升级时可配置
+    daoPackage'com.qianfan.fastframework.dao'     //包名
+    targetGenDir'src/main/java'                 //生成目录
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:' + rootProject.ext.supportVersion
+    implementation 'com.android.support:design:' + rootProject.ext.supportVersion
+    implementation 'com.android.support:support-v4:' + rootProject.ext.supportVersion
+    implementation 'com.android.support:recyclerview-v7:' + rootProject.ext.supportVersion
+
+    //https://github.com/YoKeyword/Fragmentation/tree/master/fragmentation_swipeback
+    implementation 'me.yokeyword:fragmentation-swipeback:0.7.9'
+    //https://github.com/YoKeyword/Fragmentation
+    implementation 'me.yokeyword:fragmentation:0.10.1'
+
+    //https://github.com/square/retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.2.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+
+    //https://github.com/greenrobot/greenDAO
+    implementation 'org.greenrobot:greendao:3.2.0'
+
+    //https://github.com/facebook/fresco
+    def fresco_version = "1.10.0"
+    implementation "com.facebook.fresco:fresco:$fresco_version"
+    implementation "com.facebook.fresco:animated-gif:$fresco_version"
+    implementation "com.facebook.fresco:imagepipeline-okhttp:$fresco_version"
+    implementation "com.facebook.fresco:webpsupport:$fresco_version"
+    //https://github.com/kareluo/IntensifyImageView
+    implementation 'me.kareluo.intensify:image:1.1.0'
+
+
+}
